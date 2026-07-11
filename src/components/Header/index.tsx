@@ -3,7 +3,7 @@ import Navigation from "./Navigation/Navigation";
 
 export const Header = () => {
   return (
-    <div className="flex items-center h-20 justify-around border-b">
+    <div className="flex items-center h-20 justify-around shadow-xl">
       <Logo />
       <Navigation />
     </div>
