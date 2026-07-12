@@ -1,30 +1,32 @@
 export const MonthlyPaymentCard = () => {
   return (
     <div className="w-full border-none rounded-2xl shadow-2xl bg-white">
-      <div className="flex flex-col items-center justify-center gap-4 p-6">
-        <h4 className="text-blue-950 font-semibold text-xl text-shadow-md">
+      <div className="flex flex-col items-center justify-center gap-2 sm:gap-4 p-4 sm:p-6">
+        <h4 className="text-blue-950 font-semibold text-base sm:text-lg lg:text-xl">
           SUA PARCELA MENSAL
         </h4>
-        <p className="text-blue-950 font-bold text-6xl text-shadow-md">
+        <p className="text-blue-950 font-bold text-3xl sm:text-4xl lg:text-6xl">
           R$ 1.845,72
         </p>
       </div>
-      <div className="flex items-center justify-center gap-4 p-6">
-        <div>
-          <p className="text-blue-950 text-sm">TOTAL DO FINANCIAMENTO:</p>
-          <p className="text-blue-950 font-bold text-xl text-shadow-md">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6">
+        <div className="text-center sm:text-left">
+          <p className="text-blue-950 text-xs sm:text-sm">TOTAL DO FINANCIAMENTO:</p>
+          <p className="text-blue-950 font-bold text-lg sm:text-xl">
             R$ 60.000,00
           </p>
         </div>
-        <div>
-          <p className="text-blue-950 text-sm">TAXA DE JUROS:</p>
-          <p className="text-blue-950 font-bold text-xl text-shadow-md">
+        <div className="hidden sm:block w-px h-10 bg-slate-200" aria-hidden="true" />
+        <div className="text-center sm:text-left">
+          <p className="text-blue-950 text-xs sm:text-sm">TAXA DE JUROS:</p>
+          <p className="text-blue-950 font-bold text-lg sm:text-xl">
             1.25% A.M.
           </p>
         </div>
-        <div>
-          <p className="text-blue-950 text-sm">CET ANUAL:</p>
-          <p className="text-blue-950 font-bold text-xl text-shadow-md">
+        <div className="hidden sm:block w-px h-10 bg-slate-200" aria-hidden="true" />
+        <div className="text-center sm:text-left">
+          <p className="text-blue-950 text-xs sm:text-sm">CET ANUAL:</p>
+          <p className="text-blue-950 font-bold text-lg sm:text-xl">
             16.5%
           </p>
         </div>
