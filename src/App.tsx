@@ -1,4 +1,6 @@
+import { CostBreakdown } from "./components/CostBreakdown";
 import { Header } from "./components/Header";
+import { MonthlyPaymentCard } from "./components/MonthlyPaymentCard";
 import { SimulationForm } from "./components/SimulationForm";
 
 export function App() {
@@ -14,7 +16,8 @@ export function App() {
             </div>
             <div className="flex flex-col gap-6 lg:col-span-7 lg:gap-8">
               {/*Right column: results grid*/}
-              
+              <MonthlyPaymentCard />
+              <CostBreakdown />
             </div>
           </div>
         </main>
