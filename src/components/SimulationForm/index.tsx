@@ -2,66 +2,63 @@ import { IoIosWarning } from "react-icons/io";
 
 export const SimulationForm = () => {
   return (
-    <div className="w-2xl h-144 border-none rounded-2xl shadow-2xl">
-      <div className="bg-blue-800 border-none rounded-t-2xl font-bold text-white text-3xl text-shadow-md p-3">
+    <div className="w-full border-none rounded-2xl shadow-2xl bg-white">
+      <div className="bg-blue-800 border-none rounded-t-2xl font-bold text-white text-xl sm:text-2xl lg:text-3xl text-shadow-md p-3">
         <h3>FAÇA SUA SIMULAÇÃO</h3>
       </div>
-      <div>
-        <form action="#" className="">
+      <div className="p-4 sm:p-6">
+        <form action="#">
           {/*Input container - vehicle */}
-          <div className="flex flex-col items-center m-2">
+          <div className="mb-4">
             {/*vehicleValue*/}
-            <div className="p-2">
-              <label htmlFor="vehicleValue" className="font-semibold">
-                Valor do veiculo (R$)
-              </label>
-            </div>
-            <div className="justify-around">
+            <label htmlFor="vehicleValue" className="block font-semibold text-sm uppercase mb-1">
+              Valor do veículo (R$)
+            </label>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4">
               <input
                 type="range"
-                className="w-100"
+                className="w-full sm:flex-1"
                 id="vehicleValueRange"
                 name="vehicleValueRange"
               />
               <input
                 type="number"
-                className="border rounded mx-8 text-center"
+                className="border rounded px-3 py-1.5 text-center w-full sm:w-32"
                 id="vehicleValue"
                 name="vehicleValue"
-                placeholder="80.000"
+                placeholder="85.000,00"
               />
             </div>
           </div>
           {/*initialAmount value*/}
-          <div className="flex flex-col items-center m-2">
-            <div className="p-2">
-              <label htmlFor="initialAmount" className="font-semibold">
-                Valor de entrada (R$)
-              </label>
-            </div>
-            <div className="justify-around">
+          <div className="mb-4">
+            <label htmlFor="initialAmount" className="block font-semibold text-sm uppercase mb-1">
+              Valor da entrada (R$)
+            </label>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4">
               <input
                 type="range"
-                className="w-100"
+                className="w-full sm:flex-1"
                 id="initialAmountRange"
                 name="initialAmountRange"
               />
               <input
                 type="number"
-                className="border rounded mx-8 text-center"
+                className="border rounded px-3 py-1.5 text-center w-full sm:w-24"
                 id="initialAmount"
-                placeholder="80.000"
+                placeholder="25.000,00"
                 name="initialAmount"
               />
+              <span className="text-sm font-semibold">30%</span>
             </div>
           </div>
           {/*installments */}
-          <div className="flex flex-col justify-center items-start p-4">
-            <label className="font-semibold" htmlFor="installments">
-              Parcelas
+          <div className="mb-4">
+            <label className="block font-semibold text-sm uppercase mb-1" htmlFor="installments">
+              Plano de pagamento
             </label>
             <select
-              className="border rounded p-2 w-100 font-semibold"
+              className="border rounded p-2 w-full font-semibold"
               name="installments"
               id="installments"
             >
@@ -81,12 +78,12 @@ export const SimulationForm = () => {
             </select>
           </div>
           {/*stateRegion*/}
-          <div className="flex flex-col justify-center items-start p-4">
-            <label className="font-semibold" htmlFor="stateRegion">
+          <div className="mb-4">
+            <label className="block font-semibold text-sm uppercase mb-1" htmlFor="stateRegion">
               Estado
             </label>
             <select
-              className="border rounded p-2 w-100 font-semibold"
+              className="border rounded p-2 w-full font-semibold"
               name="stateRegion"
               id="stateRegion"
             >
@@ -186,7 +183,7 @@ export const SimulationForm = () => {
           <div className="flex items-center justify-center p-2">
             <button
               type="submit"
-              className="p-4 bg-emerald-500 rounded-2xl w-70 font-bold text-white text-shadow-2xl uppercase"
+              className="p-4 bg-emerald-500 rounded-2xl w-full font-bold text-white text-shadow-2xl uppercase"
             >
               Calcular
             </button>
