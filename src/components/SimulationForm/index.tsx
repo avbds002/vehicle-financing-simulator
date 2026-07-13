@@ -1,4 +1,5 @@
 import { IoIosWarning } from "react-icons/io";
+import { RangeInput } from "../RangeInput";
 
 export const SimulationForm = () => {
   return (
@@ -9,30 +10,20 @@ export const SimulationForm = () => {
       <div className="p-4 sm:p-6">
         <form action="#">
           {/*Input container - vehicle */}
-          <div className="mb-4">
-            {/*vehicleValue*/}
-            <label htmlFor="vehicleValue" className="block font-semibold text-sm uppercase mb-1">
-              Valor do veículo (R$)
-            </label>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4">
-              <input
-                type="range"
-                className="w-full sm:flex-1"
-                id="vehicleValueRange"
-                name="vehicleValueRange"
-              />
-              <input
-                type="number"
-                className="border rounded px-3 py-1.5 text-center w-full sm:w-32"
-                id="vehicleValue"
-                name="vehicleValue"
-                placeholder="85.000,00"
-              />
-            </div>
-          </div>
+          <RangeInput
+            label="Valor do veículo (R$)"
+            id="vehicleValue"
+            min={0}
+            max={200000}
+            step={1000}
+            defaultValue={85000}
+          />
           {/*initialAmount value*/}
           <div className="mb-4">
-            <label htmlFor="initialAmount" className="block font-semibold text-sm uppercase mb-1">
+            <label
+              htmlFor="initialAmount"
+              className="block font-semibold text-sm uppercase mb-1"
+            >
               Valor da entrada (R$)
             </label>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4">
@@ -54,7 +45,10 @@ export const SimulationForm = () => {
           </div>
           {/*installments */}
           <div className="mb-4">
-            <label className="block font-semibold text-sm uppercase mb-1" htmlFor="installments">
+            <label
+              className="block font-semibold text-sm uppercase mb-1"
+              htmlFor="installments"
+            >
               Plano de pagamento
             </label>
             <select
@@ -79,7 +73,10 @@ export const SimulationForm = () => {
           </div>
           {/*stateRegion*/}
           <div className="mb-4">
-            <label className="block font-semibold text-sm uppercase mb-1" htmlFor="stateRegion">
+            <label
+              className="block font-semibold text-sm uppercase mb-1"
+              htmlFor="stateRegion"
+            >
               Estado
             </label>
             <select
