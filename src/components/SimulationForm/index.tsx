@@ -121,87 +121,43 @@ export const SimulationForm = () => {
               id="stateRegion"
             >
               <option value="null">Escolha uma opção</option>
-              <option value="AC" className="font-semibold">
-                Acre
-              </option>
-              <option value="AL" className="font-semibold">
-                Alagoas
-              </option>
-              <option value="AP" className="font-semibold">
-                Amapá
-              </option>
-              <option value="AM" className="font-semibold">
-                Amazonas
-              </option>
-              <option value="BA" className="font-semibold">
-                Bahia
-              </option>
-              <option value="CE" className="font-semibold">
-                Ceará
-              </option>
-              <option value="DF" className="font-semibold">
-                Distrito Federal
-              </option>
-              <option value="ES" className="font-semibold">
-                Espírito Santo
-              </option>
-              <option value="GO" className="font-semibold">
-                Goiás
-              </option>
-              <option value="MA" className="font-semibold">
-                Maranhão
-              </option>
-              <option value="MT" className="font-semibold">
-                Mato Grosso
-              </option>
-              <option value="MS" className="font-semibold">
-                Mato Grosso do Sul
-              </option>
-              <option value="MG" className="font-semibold">
-                Minas Gerais
-              </option>
-              <option value="PA" className="font-semibold">
-                Pará
-              </option>
-              <option value="PB" className="font-semibold">
-                Paraíba
-              </option>
-              <option value="PR" className="font-semibold">
-                Paraná
-              </option>
-              <option value="PE" className="font-semibold">
-                Pernambuco
-              </option>
-              <option value="PI" className="font-semibold">
-                Piauí
-              </option>
-              <option value="RJ" className="font-semibold">
-                Rio de Janeiro
-              </option>
-              <option value="RN" className="font-semibold">
-                Rio Grande do Norte
-              </option>
-              <option value="RS" className="font-semibold">
-                Rio Grande do Sul
-              </option>
-              <option value="RO" className="font-semibold">
-                Rondônia
-              </option>
-              <option value="RR" className="font-semibold">
-                Roraima
-              </option>
-              <option value="SC" className="font-semibold">
-                Santa Catarina
-              </option>
-              <option value="SP" className="font-semibold">
-                São Paulo
-              </option>
-              <option value="SE" className="font-semibold">
-                Sergipe
-              </option>
-              <option value="TO" className="font-semibold">
-                Tocantins
-              </option>
+              {[
+                { value: "AC", label: "Acre" },
+                { value: "AL", label: "Alagoas" },
+                { value: "AP", label: "Amapá" },
+                { value: "AM", label: "Amazonas" },
+                { value: "BA", label: "Bahia" },
+                { value: "CE", label: "Ceará" },
+                { value: "DF", label: "Distrito Federal" },
+                { value: "ES", label: "Espírito Santo" },
+                { value: "GO", label: "Goiás" },
+                { value: "MA", label: "Maranhão" },
+                { value: "MT", label: "Mato Grosso" },
+                { value: "MS", label: "Mato Grosso do Sul" },
+                { value: "MG", label: "Minas Gerais" },
+                { value: "PA", label: "Pará" },
+                { value: "PB", label: "Paraíba" },
+                { value: "PR", label: "Paraná" },
+                { value: "PE", label: "Pernambuco" },
+                { value: "PI", label: "Piauí" },
+                { value: "RJ", label: "Rio de Janeiro" },
+                { value: "RN", label: "Rio Grande do Norte" },
+                { value: "RS", label: "Rio Grande do Sul" },
+                { value: "RO", label: "Rondônia" },
+                { value: "RR", label: "Roraima" },
+                { value: "SC", label: "Santa Catarina" },
+                { value: "SP", label: "São Paulo" },
+                { value: "SE", label: "Sergipe" },
+                { value: "TO", label: "Tocantins" },
+              ].map((state) => (
+                <option
+                  key={state.value}
+                  value={state.value}
+                  className="font-semibold"
+                >
+                  {state.label}
+                </option>
+              ))}
             </select>
           </div>
           {/*warning*/}
