@@ -1,7 +1,27 @@
+import { useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { RangeInput } from "../RangeInput";
 
 export const SimulationForm = () => {
+  const [vehicleValue, setVehicleValue] = useState(85000);
+  const [initialAmount, setInitialAmount] = useState(25000);
+
+  const handleVehicleChange = (newValue: number) => {
+    setVehicleValue(newValue);
+    // Clamp initialAmount if it exceeds the new vehicle value
+    if (initialAmount > newValue) {
+      setInitialAmount(newValue);
+    }
+  };
+
+  const handleInitialAmountChange = (newValue: number) => {
+    // Never allow initialAmount to exceed vehicleValue
+    setInitialAmount(Math.min(newValue, vehicleValue));
+  };
+
+  const percentage =
+    vehicleValue > 0 ? Math.round((initialAmount / vehicleValue) * 100) : 0;
+
   return (
     <div className="w-full border-none rounded-2xl shadow-2xl bg-white">
       <div className="bg-blue-800 border-none rounded-t-2xl font-bold text-white text-xl sm:text-2xl lg:text-3xl text-shadow-md p-3">
@@ -16,7 +36,8 @@ export const SimulationForm = () => {
             min={0}
             max={200000}
             step={1000}
-            defaultValue={85000}
+            value={vehicleValue}
+            onChange={handleVehicleChange}
           />
           {/*initialAmount value*/}
           <div className="mb-4">
@@ -32,15 +53,30 @@ export const SimulationForm = () => {
                 className="w-full sm:flex-1"
                 id="initialAmountRange"
                 name="initialAmountRange"
+                min={0}
+                max={vehicleValue}
+                step={1000}
+                value={initialAmount}
+                onChange={(e) =>
+                  handleInitialAmountChange(Number(e.target.value))
+                }
               />
               <input
                 type="number"
                 className="border rounded px-3 py-1.5 text-center w-full sm:w-24"
                 id="initialAmount"
-                placeholder="25.000,00"
                 name="initialAmount"
+                min={0}
+                max={vehicleValue}
+                step={1000}
+                value={initialAmount}
+                onChange={(e) =>
+                  handleInitialAmountChange(Number(e.target.value))
+                }
               />
-              <span className="text-sm font-semibold">30%</span>
+              <span id="percentageSpanValue" className="text-sm font-semibold">
+                {percentage}%
+              </span>
             </div>
           </div>
           {/*installments */}

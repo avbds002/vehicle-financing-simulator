@@ -7,6 +7,8 @@ interface RangeInputProps {
   max?: number;
   step?: number;
   defaultValue?: number;
+  value?: number;
+  onChange?: (value: number) => void;
 }
 
 export const RangeInput = ({
@@ -16,11 +18,21 @@ export const RangeInput = ({
   max = 200000,
   step = 1000,
   defaultValue = 0,
+  value: controlledValue,
+  onChange,
 }: RangeInputProps) => {
-  const [value, setValue] = useState(defaultValue);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+
+  const isControlled = controlledValue !== undefined;
+  const value = isControlled ? controlledValue : internalValue;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(Number(e.target.value));
+    const newValue = Number(e.target.value);
+    if (isControlled && onChange) {
+      onChange(newValue);
+    } else {
+      setInternalValue(newValue);
+    }
   };
 
   return (
