@@ -160,6 +160,24 @@ export const SimulationForm = () => {
               ))}
             </select>
           </div>
+          {/*Interest rate */}
+          <div className="mb-4">
+            <label
+              className="block font-semibold text-sm uppercase mb-1"
+              htmlFor="interestRate"
+            >
+              Taxa de Juros (% a.a.)
+            </label>
+            <input
+              type="number"
+              className="border rounded p-2 w-full font-semibold"
+              name="interestRate"
+              id="interestRate"
+              placeholder="Ex: 10.5"
+              step="0.1"
+              min="0"
+            />
+          </div>
           {/*warning*/}
           <div className="flex items-start p-4">
             <IoIosWarning className="text-2xl text-gray-500 m-2" />
