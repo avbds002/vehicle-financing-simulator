@@ -2,9 +2,24 @@ import { useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { RangeInput } from "../RangeInput";
 
+interface SimulationData {
+  vehicleValue: number;
+  initialAmount: number;
+  installments: number;
+  stateRegion: string;
+}
+
 export const SimulationForm = () => {
   const [vehicleValue, setVehicleValue] = useState(85000);
   const [initialAmount, setInitialAmount] = useState(25000);
+  const [installments, setInstallments] = useState<string>("null");
+  const [stateRegion, setStateRegion] = useState<string>("null");
+  const [simulationHistory, setSimulationHistory] = useState<SimulationData[]>(
+    [],
+  );
+
+  const VEHICLE_MIN = 10000;
+  const INITIAL_AMOUNT_MIN = 5000;
 
   const handleVehicleChange = (newValue: number) => {
     setVehicleValue(newValue);
@@ -19,8 +34,77 @@ export const SimulationForm = () => {
     setInitialAmount(Math.min(newValue, vehicleValue));
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    //Validation: negative integers NaN and checks for numeric fields
+
+    //Check if the vehicle type is a number
+    if (isNaN(vehicleValue) || typeof vehicleValue !== "number") {
+      alert("Vehicle value cannot be NaN or string");
+      setVehicleValue(VEHICLE_MIN);
+    }
+
+    //Check if the vehicle is a negative number
+    if (vehicleValue < 0) {
+      alert("Vehicle value cannot be a negative number");
+      setVehicleValue(VEHICLE_MIN);
+    }
+
+    //Check if the initialAmount type is a number
+    if (isNaN(initialAmount) || typeof initialAmount !== "number") {
+      alert("Initial amount cannot be NaN or string");
+      setInitialAmount(INITIAL_AMOUNT_MIN);
+      return;
+    }
+
+    //Check if the initialAmount is a negative number
+    if (initialAmount < 0) {
+      alert("Initial amount cannot be a negative integer");
+      setInitialAmount(INITIAL_AMOUNT_MIN);
+      return;
+    }
+
+    //Validation: initialAmount cannot exceed vehicleValue
+    if (initialAmount > vehicleValue) {
+      alert("Initial Amount cannot exceed the vehicle value");
+      setInitialAmount(INITIAL_AMOUNT_MIN);
+      return;
+    }
+
+    //Check for NaN, negative integer or string for installments
+    const parsedInstallments = Number(installments);
+    if (isNaN(parsedInstallments) || parsedInstallments < 0) {
+      alert("installments cannot be a negative integer or string");
+      setInstallments("null");
+      return;
+    }
+
+    //Build simulation entry and push to history
+    const simulationEntry: SimulationData = {
+      vehicleValue,
+      initialAmount,
+      installments: parsedInstallments,
+      stateRegion,
+    };
+
+    setSimulationHistory((prev) => [...prev, simulationEntry]);
+
+    alert(
+      `Simulação realizada com sucesso!\nValor do veículo: R$ ${vehicleValue}\nValor da entrada: R$ ${initialAmount}\nNúmero de parcelas: ${parsedInstallments}\nEstado: ${stateRegion}`,
+    );
+  };
+
   const percentage =
     vehicleValue > 0 ? Math.round((initialAmount / vehicleValue) * 100) : 0;
+
+  //Most recenet simulation (if any)
+  const latestSimulation =
+    simulationHistory.length > 0
+      ? simulationHistory[simulationHistory.length - 1]
+      : null;
+
+  console.log(latestSimulation);
 
   return (
     <div className="w-full border-none rounded-2xl shadow-2xl bg-white">
@@ -28,12 +112,12 @@ export const SimulationForm = () => {
         <h3>FAÇA SUA SIMULAÇÃO</h3>
       </div>
       <div className="p-4 sm:p-6">
-        <form action="#">
+        <form action="#" onSubmit={handleSubmit}>
           {/*Input container - vehicle */}
           <RangeInput
             label="Valor do veículo (R$)"
             id="vehicleValue"
-            min={0}
+            min={VEHICLE_MIN}
             max={200000}
             step={1000}
             value={vehicleValue}
@@ -55,7 +139,7 @@ export const SimulationForm = () => {
                 name="initialAmountRange"
                 min={0}
                 max={vehicleValue}
-                step={1000}
+                step={1}
                 value={initialAmount}
                 onChange={(e) =>
                   handleInitialAmountChange(Number(e.target.value))
@@ -68,7 +152,7 @@ export const SimulationForm = () => {
                 name="initialAmount"
                 min={0}
                 max={vehicleValue}
-                step={1000}
+                step={1}
                 value={initialAmount}
                 onChange={(e) =>
                   handleInitialAmountChange(Number(e.target.value))
@@ -91,6 +175,8 @@ export const SimulationForm = () => {
               className="border rounded p-2 w-full font-semibold"
               name="installments"
               id="installments"
+              value={installments}
+              onChange={(e) => setInstallments(e.target.value)}
             >
               <option value="null">Escolha uma opção</option>
               <option value="48" className="font-semibold">
@@ -119,6 +205,8 @@ export const SimulationForm = () => {
               className="border rounded p-2 w-full font-semibold"
               name="stateRegion"
               id="stateRegion"
+              value={stateRegion}
+              onChange={(e) => setStateRegion(e.target.value)}
             >
               <option value="null">Escolha uma opção</option>
               {[

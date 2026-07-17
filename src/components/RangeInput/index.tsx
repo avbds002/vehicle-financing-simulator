@@ -62,7 +62,7 @@ export const RangeInput = ({
           name={id}
           min={min}
           max={max}
-          step={step}
+          step={1}
           value={value}
           onChange={handleChange}
         />
