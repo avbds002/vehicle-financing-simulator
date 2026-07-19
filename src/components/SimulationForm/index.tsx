@@ -2,27 +2,22 @@ import { useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { RangeInput } from "../RangeInput";
 
-interface SimulationData {
-  vehicleValue: number;
-  initialAmount: number;
-  installments: number;
-  stateRegion: string;
-  interestRate: number;
+import type { SimulationData } from "../../types";
+
+interface SimulationFormProps {
+  addSimulation: (entry: SimulationData) => void;
 }
 
-export const SimulationForm = () => {
+const VEHICLE_MIN = 10000;
+const INITIAL_AMOUNT_MIN = 5000;
+const INTEREST_RATE_MIN = 1;
+
+export const SimulationForm = ({ addSimulation }: SimulationFormProps) => {
   const [vehicleValue, setVehicleValue] = useState(85000);
   const [initialAmount, setInitialAmount] = useState(25000);
   const [installments, setInstallments] = useState<string>("null");
   const [stateRegion, setStateRegion] = useState<string>("null");
   const [interestRate, setInterestRate] = useState(0);
-  const [simulationHistory, setSimulationHistory] = useState<SimulationData[]>(
-    [],
-  );
-
-  const VEHICLE_MIN = 10000;
-  const INITIAL_AMOUNT_MIN = 5000;
-  const INTEREST_RATE_MIN = 1;
 
   const handleVehicleChange = (newValue: number) => {
     setVehicleValue(newValue);
@@ -108,26 +103,11 @@ export const SimulationForm = () => {
       interestRate,
     };
 
-    setSimulationHistory((prev) => [...prev, simulationEntry]);
-
-    alert(
-      `Dados armazenados com sucesso!\nValor do veículo: R$ ${vehicleValue}\nValor da entrada: R$ ${initialAmount}\nNúmero de parcelas: ${parsedInstallments}\nEstado: ${stateRegion} \nTaxa de juros A.M: ${interestRate}`,
-    );
+    addSimulation(simulationEntry);
   };
 
   const percentage =
     vehicleValue > 0 ? Math.round((initialAmount / vehicleValue) * 100) : 0;
-
-  //Most recenet simulation (if any)
-  const latestSimulation =
-    simulationHistory.length > 0
-      ? simulationHistory[simulationHistory.length - 1]
-      : null;
-
-  localStorage.setItem(
-    "latest-simulation-value",
-    JSON.stringify(latestSimulation),
-  );
 
   return (
     <div className="w-full border-none rounded-2xl shadow-2xl bg-white">
