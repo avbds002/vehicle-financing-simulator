@@ -7,6 +7,7 @@ interface SimulationData {
   initialAmount: number;
   installments: number;
   stateRegion: string;
+  interestRate: number;
 }
 
 export const SimulationForm = () => {
@@ -14,12 +15,14 @@ export const SimulationForm = () => {
   const [initialAmount, setInitialAmount] = useState(25000);
   const [installments, setInstallments] = useState<string>("null");
   const [stateRegion, setStateRegion] = useState<string>("null");
+  const [interestRate, setInterestRate] = useState(0);
   const [simulationHistory, setSimulationHistory] = useState<SimulationData[]>(
     [],
   );
 
   const VEHICLE_MIN = 10000;
   const INITIAL_AMOUNT_MIN = 5000;
+  const INTEREST_RATE_MIN = 1;
 
   const handleVehicleChange = (newValue: number) => {
     setVehicleValue(newValue);
@@ -32,6 +35,10 @@ export const SimulationForm = () => {
   const handleInitialAmountChange = (newValue: number) => {
     // Never allow initialAmount to exceed vehicleValue
     setInitialAmount(Math.min(newValue, vehicleValue));
+  };
+
+  const handleInterestRateChange = (newValue: number) => {
+    setInterestRate(newValue);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -80,18 +87,25 @@ export const SimulationForm = () => {
       return;
     }
 
+    //Check if the interestRate type is a number
+    if (isNaN(interestRate) || typeof interestRate !== "number") {
+      alert("Interest rate value cannot be NaN or string");
+      setInterestRate(INTEREST_RATE_MIN);
+    }
+
     //Build simulation entry and push to history
     const simulationEntry: SimulationData = {
       vehicleValue,
       initialAmount,
       installments: parsedInstallments,
       stateRegion,
+      interestRate,
     };
 
     setSimulationHistory((prev) => [...prev, simulationEntry]);
 
     alert(
-      `Simulação realizada com sucesso!\nValor do veículo: R$ ${vehicleValue}\nValor da entrada: R$ ${initialAmount}\nNúmero de parcelas: ${parsedInstallments}\nEstado: ${stateRegion}`,
+      `Dados armazenados com sucesso!\nValor do veículo: R$ ${vehicleValue}\nValor da entrada: R$ ${initialAmount}\nNúmero de parcelas: ${parsedInstallments}\nEstado: ${stateRegion} \nTaxa de juros A.M: ${interestRate}`,
     );
   };
 
@@ -104,7 +118,10 @@ export const SimulationForm = () => {
       ? simulationHistory[simulationHistory.length - 1]
       : null;
 
-  console.log(latestSimulation);
+  localStorage.setItem(
+    "latest-simulation-value",
+    JSON.stringify(latestSimulation),
+  );
 
   return (
     <div className="w-full border-none rounded-2xl shadow-2xl bg-white">
@@ -254,16 +271,18 @@ export const SimulationForm = () => {
               className="block font-semibold text-sm uppercase mb-1"
               htmlFor="interestRate"
             >
-              Taxa de Juros (% a.a.)
+              Taxa de Juros (% a.m.)
             </label>
             <input
               type="number"
               className="border rounded p-2 w-full font-semibold"
               name="interestRate"
               id="interestRate"
+              value={interestRate}
               placeholder="Ex: 10.5"
               step="0.1"
-              min="0"
+              min={INTEREST_RATE_MIN}
+              onChange={(e) => handleInterestRateChange(Number(e.target.value))}
             />
           </div>
           {/*warning*/}
