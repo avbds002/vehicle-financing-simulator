@@ -38,7 +38,7 @@ export const SimulationForm = () => {
   };
 
   const handleInterestRateChange = (newValue: number) => {
-    setInterestRate(newValue);
+    setInterestRate(Math.max(newValue, INTEREST_RATE_MIN));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -90,6 +90,12 @@ export const SimulationForm = () => {
     //Check if the interestRate type is a number
     if (isNaN(interestRate) || typeof interestRate !== "number") {
       alert("Interest rate value cannot be NaN or string");
+      setInterestRate(INTEREST_RATE_MIN);
+    }
+
+    //Check if interestRate is a negative number
+    if (interestRate < 0) {
+      alert("interestRate cannot be a negative integer or string");
       setInterestRate(INTEREST_RATE_MIN);
     }
 
@@ -281,6 +287,7 @@ export const SimulationForm = () => {
               value={interestRate}
               placeholder="Ex: 10.5"
               step="0.1"
+              max={5}
               min={INTEREST_RATE_MIN}
               onChange={(e) => handleInterestRateChange(Number(e.target.value))}
             />
