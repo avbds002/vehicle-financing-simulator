@@ -11,6 +11,11 @@ export function useSimulation() {
       ? simulationHistory[simulationHistory.length - 1]
       : null;
 
+  localStorage.setItem(
+    "latest-simulation-value",
+    JSON.stringify(latestSimulation),
+  );
+
   const addSimulation = (entry: SimulationData) => {
     setSimulationHistory((prev) => [...prev, entry]);
   };
