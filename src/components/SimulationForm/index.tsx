@@ -18,6 +18,7 @@ const VEHICLE_MIN = 10000;
 const INTEREST_RATE_MIN = 1;
 
 const INSTALLMENT_OPTIONS = [
+  { value: "60", label: "60 Meses" },
   { value: "48", label: "48 Meses" },
   { value: "36", label: "36 Meses" },
   { value: "24", label: "24 Meses" },
