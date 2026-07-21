@@ -1,14 +1,7 @@
 import { useMemo } from "react";
-import type { SimulationData } from "../types";
+import type { SimulationData, FinancingResult } from "../types";
 
-export interface FinancingResult {
-  financedAmount: number;
-  monthlyPayment: number;
-  totalPayable: number;
-  totalInterest: number;
-  interestRate: number;
-  installments: number;
-}
+export type { FinancingResult };
 
 /**
  * Calculates financing values using the Price amortization system (Tabela Price).
