@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { LoginButton } from "../LoginButton";
 
 export const Navigation = () => {
@@ -5,20 +6,28 @@ export const Navigation = () => {
     <nav>
       <ul className="flex flex-wrap items-center gap-2 sm:gap-4 p-2 sm:p-4">
         <li>
-          <a
-            href="#simular"
+          <Link
+            to="/"
             className="text-blue-600 font-semibold text-lg sm:text-2xl text-shadow-md"
           >
             SIMULAR
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#fipe"
+          <Link
+            to="/fipe"
             className="text-blue-600 font-semibold text-lg sm:text-2xl text-shadow-md"
           >
             TABELA FIPE
-          </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/loan-book-page"
+            className="text-blue-600 font-semibold text-lg sm:text-2xl text-shadow-md"
+          >
+            FINANCIAMENTOS
+          </Link>
         </li>
         <li>
           <LoginButton />
