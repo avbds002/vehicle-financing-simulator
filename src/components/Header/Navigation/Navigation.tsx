@@ -1,14 +1,30 @@
 import { Link } from "react-router-dom";
 import { LoginButton } from "../LoginButton";
 
-export const Navigation = () => {
+interface NavigationProps {
+  variant?: "desktop" | "mobile";
+}
+
+export const Navigation = ({ variant = "desktop" }: NavigationProps) => {
+  const isMobile = variant === "mobile";
+
   return (
     <nav>
-      <ul className="flex flex-wrap items-center gap-2 sm:gap-4 p-2 sm:p-4">
+      <ul
+        className={
+          isMobile
+            ? "flex flex-col items-stretch gap-1 px-4 pb-4 pt-2 border-t border-slate-200"
+            : "flex flex-wrap items-center gap-4 p-4"
+        }
+      >
         <li>
           <Link
             to="/"
-            className="text-blue-600 font-semibold text-lg sm:text-2xl text-shadow-md"
+            className={
+              isMobile
+                ? "block text-blue-600 font-semibold text-lg py-2 px-2 rounded hover:bg-blue-50 transition-colors"
+                : "text-blue-600 font-semibold text-2xl text-shadow-md"
+            }
           >
             SIMULAR
           </Link>
@@ -16,7 +32,11 @@ export const Navigation = () => {
         <li>
           <Link
             to="/fipe"
-            className="text-blue-600 font-semibold text-lg sm:text-2xl text-shadow-md"
+            className={
+              isMobile
+                ? "block text-blue-600 font-semibold text-lg py-2 px-2 rounded hover:bg-blue-50 transition-colors"
+                : "text-blue-600 font-semibold text-2xl text-shadow-md"
+            }
           >
             TABELA FIPE
           </Link>
@@ -24,12 +44,16 @@ export const Navigation = () => {
         <li>
           <Link
             to="/loan-book-page"
-            className="text-blue-600 font-semibold text-lg sm:text-2xl text-shadow-md"
+            className={
+              isMobile
+                ? "block text-blue-600 font-semibold text-lg py-2 px-2 rounded hover:bg-blue-50 transition-colors"
+                : "text-blue-600 font-semibold text-2xl text-shadow-md"
+            }
           >
             FINANCIAMENTOS
           </Link>
         </li>
-        <li>
+        <li className={isMobile ? "pt-1" : ""}>
           <LoginButton />
         </li>
       </ul>
