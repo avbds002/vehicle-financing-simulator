@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { Header } from "./components/Header";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { SimulationPage } from "./pages/SimulationPage";
 import { LoginPage } from "./pages/LoginPage";
 import { FipeTablePage } from "./pages/FipeTablePage";
@@ -19,10 +20,15 @@ export function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
+          {/* Public routes */}
           <Route path="/" element={<SimulationPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/fipe" element={<FipeTablePage />} />
-          <Route path="/loan-book-page" element={<LoanBookPage />} />
+
+          {/* Protected routes — require authentication */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/fipe" element={<FipeTablePage />} />
+            <Route path="/loan-book-page" element={<LoanBookPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
