@@ -4,13 +4,13 @@ import { SummaryRow } from "../SummaryRow";
 interface PlanSummaryProps {
   installments: number;
   financedAmount: number;
-  totalPayable: number;
+  finalVehicleValue: number;
 }
 
 export const PlanSummary = ({
   installments,
   financedAmount,
-  totalPayable,
+  finalVehicleValue,
 }: PlanSummaryProps) => {
   return (
     <div className="flex flex-col items-start gap-3 sm:gap-4 p-4 sm:p-6">
@@ -24,8 +24,8 @@ export const PlanSummary = ({
           value={formatCurrency(financedAmount)}
         />
         <SummaryRow
-          label="Valor total pago:"
-          value={formatCurrency(totalPayable)}
+          label="Total do veiculo c/ juros:"
+          value={formatCurrency(finalVehicleValue)}
         />
       </div>
     </div>

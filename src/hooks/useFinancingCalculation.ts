@@ -25,6 +25,7 @@ export function useFinancingCalculation(
         totalInterest: 0,
         interestRate: 0,
         installments: 0,
+        finalVehicleValue: 0,
       };
     }
 
@@ -43,6 +44,7 @@ export function useFinancingCalculation(
         totalInterest: 0,
         interestRate: 0,
         installments,
+        finalVehicleValue: 0,
       };
     }
 
@@ -56,6 +58,8 @@ export function useFinancingCalculation(
     const totalPayable = monthlyPayment * n;
     const totalInterest = totalPayable - financedAmount;
 
+    const finalVehicleValue = totalPayable + totalInterest;
+
     return {
       financedAmount,
       monthlyPayment,
@@ -63,6 +67,7 @@ export function useFinancingCalculation(
       totalInterest,
       interestRate,
       installments,
+      finalVehicleValue,
     };
   }, [simulation]);
 }

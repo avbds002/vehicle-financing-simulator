@@ -9,8 +9,13 @@ interface CostBreakdownProps {
 
 /* ── Component ─────────────────────────────────────────── */
 export const CostBreakdown = ({ latestSimulation }: CostBreakdownProps) => {
-  const { totalPayable, totalInterest, installments, financedAmount } =
-    useFinancingCalculation(latestSimulation);
+  const {
+    totalPayable,
+    totalInterest,
+    installments,
+    financedAmount,
+    finalVehicleValue,
+  } = useFinancingCalculation(latestSimulation);
 
   return (
     <div className="w-full border-none rounded-2xl shadow-2xl bg-white grid grid-cols-1 lg:grid-cols-2">
@@ -31,7 +36,7 @@ export const CostBreakdown = ({ latestSimulation }: CostBreakdownProps) => {
       <PlanSummary
         installments={installments}
         financedAmount={financedAmount}
-        totalPayable={totalPayable}
+        finalVehicleValue={finalVehicleValue}
       />
     </div>
   );

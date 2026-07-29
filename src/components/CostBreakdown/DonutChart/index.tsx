@@ -168,7 +168,7 @@ export const DonutChart = ({
 
       <div className="w-full space-y-1">
         <SummaryRow
-          label="Total a pagar:"
+          label="Total das parcelas:"
           value={formatCurrency(totalPayable)}
         />
         <SummaryRow

@@ -13,4 +13,5 @@ export interface FinancingResult {
   totalInterest: number;
   interestRate: number;
   installments: number;
+  finalVehicleValue: number;
 }
