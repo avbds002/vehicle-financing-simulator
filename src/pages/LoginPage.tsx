@@ -1,7 +1,18 @@
+import { useState } from "react";
+import { RegisterForm } from "../components/LoginPageComponents/RegisterForm";
+import { SignInForm } from "../components/LoginPageComponents/SignInForm";
+
 export const LoginPage = () => {
+  const [isSignIn, setIsSignIn] = useState(true);
   return (
-    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:p-12">
-      <h2 className="text-blue-950 font-bold text-2xl sm:text-3xl">Login</h2>
+    <main className="flex justify-center items-center min-h-[calc(100vh-4rem)] px-4 py-6 sm:px-6 lg:p-12">
+      <div className="w-full md:w-1/2">
+        {isSignIn ? (
+          <SignInForm onSwitchToRegister={() => setIsSignIn(false)} />
+        ) : (
+          <RegisterForm onSwitchToSignIn={() => setIsSignIn(true)} />
+        )}
+      </div>
     </main>
   );
 };
