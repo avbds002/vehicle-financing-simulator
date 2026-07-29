@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { RangeInput } from "../RangeInput";
-import { BRAZILIAN_STATES } from "../../constants/brazilianStates";
-import { validateSimulationForm } from "../../utils/validateSimulationForm";
+import { BRAZILIAN_STATES } from "../../../constants/brazilianStates";
+import { validateSimulationForm } from "../../../utils/validateSimulationForm";
 
-import type { SimulationData } from "../../types";
+import type { SimulationData } from "../../../types";
 import { InitialAmountInput } from "./InitialAmountInput";
 import { SelectInput } from "./SelectInput";
 import { InterestRateInput } from "./InterestRateInput";
@@ -94,7 +94,7 @@ export const SimulationForm = ({ addSimulation }: SimulationFormProps) => {
             label="Valor do veículo (R$)"
             id="vehicleValue"
             min={VEHICLE_MIN}
-            max={200000}
+            max={999999}
             step={1000}
             value={vehicleValue}
             onChange={handleVehicleChange}

@@ -1,6 +1,8 @@
-import { CostBreakdown } from "../components/CostBreakdown";
-import { MonthlyPaymentCard } from "../components/MonthlyPaymentCard";
-import { SimulationForm } from "../components/SimulationForm";
+import {
+  CostBreakdown,
+  MonthlyPaymentCard,
+  SimulationForm,
+} from "../components/SimulationPageComponents";
 import { useSimulation } from "../hooks/useSimulation";
 
 export const SimulationPage = () => {

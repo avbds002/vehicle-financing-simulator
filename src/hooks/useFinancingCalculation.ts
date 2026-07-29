@@ -58,7 +58,7 @@ export function useFinancingCalculation(
     const totalPayable = monthlyPayment * n;
     const totalInterest = totalPayable - financedAmount;
 
-    const finalVehicleValue = totalPayable + totalInterest;
+    const finalVehicleValue = totalPayable + initialAmount;
 
     return {
       financedAmount,

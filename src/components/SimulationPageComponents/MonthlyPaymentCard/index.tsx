@@ -1,5 +1,5 @@
-import type { SimulationData } from "../../types";
-import { useFinancingCalculation } from "../../hooks/useFinancingCalculation";
+import type { SimulationData } from "../../../types";
+import { useFinancingCalculation } from "../../../hooks/useFinancingCalculation";
 
 interface MonthlyPaymentCardProps {
   latestSimulation: SimulationData | null;
