@@ -20,11 +20,11 @@ export const PlanSummary = ({
       <div className="w-full space-y-1">
         <SummaryRow label="Parcelas:" value={`${installments}x`} />
         <SummaryRow
-          label="Total do financiamento:"
+          label="Valor financiado:"
           value={formatCurrency(financedAmount)}
         />
         <SummaryRow
-          label="Total do veiculo c/ juros:"
+          label="Valor veiculo c/ juros:"
           value={formatCurrency(finalVehicleValue)}
         />
       </div>

@@ -28,9 +28,7 @@ export const MonthlyPaymentCard = ({
       </div>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6">
         <div className="text-center sm:text-left">
-          <p className="text-blue-950 text-xs sm:text-sm">
-            TOTAL DO FINANCIAMENTO:
-          </p>
+          <p className="text-blue-950 text-xs sm:text-sm">VALOR FINANCIADO:</p>
           <p className="text-blue-950 font-bold text-lg sm:text-xl">
             {currencyFormatter.format(financedAmount)}
           </p>
