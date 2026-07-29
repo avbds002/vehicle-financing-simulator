@@ -15,3 +15,12 @@ export interface FinancingResult {
   installments: number;
   finalVehicleValue: number;
 }
+
+export interface RegisteredUser {
+  fullName: string;
+  email: string;
+  dateOfBirth: string;
+  cpf: string;
+  username: string;
+  password: string;
+}
