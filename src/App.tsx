@@ -5,6 +5,7 @@ import { SimulationPage } from "./pages/SimulationPage";
 import { LoginPage } from "./pages/LoginPage";
 import { FipeTablePage } from "./pages/FipeTablePage";
 import { LoanBookPage } from "./pages/LoanBookPage";
+import { AuthProvider } from "./hooks/useAuth";
 
 function Layout() {
   return (
@@ -17,6 +18,7 @@ function Layout() {
 
 export function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
@@ -32,5 +34,6 @@ export function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }

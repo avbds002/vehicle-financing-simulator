@@ -1,7 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext, createContext } from "react";
+import type { ReactNode } from "react";
 import type { RegisteredUser } from "../types";
 
-export function useAuth() {
+interface AuthContextType {
+  isAuthenticated: boolean;
+  login: (username: string, password: string) => RegisteredUser | null;
+  logout: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     const user = sessionStorage.getItem("user");
     const password = sessionStorage.getItem("password");
@@ -73,5 +82,17 @@ export function useAuth() {
     setIsAuthenticated(false);
   }, []);
 
-  return { isAuthenticated, login, logout };
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth(): AuthContextType {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 }
