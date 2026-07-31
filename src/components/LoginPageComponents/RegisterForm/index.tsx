@@ -7,6 +7,7 @@ import {
   validateRegisterForm,
   registerUser,
   formatCPF,
+  formatDateOfBirth,
 } from "../../../utils/validateRegisterForm";
 import type { RegisterErrors } from "../../../utils/validateRegisterForm";
 
@@ -29,6 +30,10 @@ export const RegisterForm = ({ onSwitchToSignIn }: RegisterFormProps) => {
 
   const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCpf(formatCPF(e.target.value));
+  };
+
+  const handleDateOfBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDateOfBirth(formatDateOfBirth(e.target.value));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -109,9 +114,10 @@ export const RegisterForm = ({ onSwitchToSignIn }: RegisterFormProps) => {
           <TextInput
             id="register-dob"
             label="Data de Nascimento"
-            type="date"
             value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+            onChange={handleDateOfBirthChange}
+            placeholder="dd/mm/aaaa"
+            maxLength={10}
             error={errors.dateOfBirth}
           />
 

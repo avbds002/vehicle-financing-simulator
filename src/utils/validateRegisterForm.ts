@@ -28,8 +28,34 @@ export const isValidEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
+export const formatDateOfBirth = (value: string): string => {
+  const digits = value.replace(/\D/g, "").slice(0, 8);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+  return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+};
+
+export const isValidDateFormat = (dateStr: string): boolean => {
+  return /^\d{2}\/\d{2}\/\d{4}$/.test(dateStr);
+};
+
+const parseDateDDMMYYYY = (dateStr: string): Date | null => {
+  const parts = dateStr.split("/");
+  if (parts.length !== 3) return null;
+  const day = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1;
+  const year = parseInt(parts[2], 10);
+  const date = new Date(year, month, day);
+  // Validate the date is real (e.g. no 31/02)
+  if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+    return null;
+  }
+  return date;
+};
+
 export const isOfLegalAge = (dateStr: string): boolean => {
-  const birthDate = new Date(dateStr);
+  const birthDate = parseDateDDMMYYYY(dateStr);
+  if (!birthDate) return false;
   const today = new Date();
   let age = today.getFullYear() - birthDate.getFullYear();
   const monthDiff = today.getMonth() - birthDate.getMonth();
@@ -109,6 +135,10 @@ export function validateRegisterForm(
   // Date of birth
   if (!values.dateOfBirth) {
     errors.dateOfBirth = "Data de nascimento é obrigatória.";
+  } else if (!isValidDateFormat(values.dateOfBirth)) {
+    errors.dateOfBirth = "Informe a data no formato dd/mm/aaaa.";
+  } else if (!parseDateDDMMYYYY(values.dateOfBirth)) {
+    errors.dateOfBirth = "Data de nascimento inválida.";
   } else if (!isOfLegalAge(values.dateOfBirth)) {
     errors.dateOfBirth =
       "Você deve ter pelo menos 18 anos para se registrar.";
