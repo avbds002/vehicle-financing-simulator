@@ -24,3 +24,14 @@ export interface RegisteredUser {
   username: string;
   password: string;
 }
+
+export interface FipeCar {
+  id: number;
+  name: string;
+  version: string;
+  year: string;
+  fipePrice: string;
+  consumption: string;
+  insurance: string;
+  image: string;
+}
