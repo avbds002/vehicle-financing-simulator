@@ -31,7 +31,7 @@ export const Navigation = ({ variant = "desktop" }: NavigationProps) => {
         </li>
         <li>
           <Link
-            to="/fipe"
+            to="/vehicle-table"
             className={
               isMobile
                 ? "block text-blue-600 font-semibold text-lg py-2 px-2 rounded hover:bg-blue-50 transition-colors"

@@ -3,7 +3,7 @@ import { Header } from "./components/Header";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { SimulationPage } from "./pages/SimulationPage";
 import { LoginPage } from "./pages/LoginPage";
-import { FipeTablePage } from "./pages/FipeTablePage";
+import { VehicleTablePage } from "./pages/VehicleTablePage";
 import { LoanBookPage } from "./pages/LoanBookPage";
 import { AuthProvider } from "./hooks/useAuth";
 
@@ -19,21 +19,21 @@ function Layout() {
 export function App() {
   return (
     <AuthProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          {/* Public routes */}
-          <Route path="/" element={<SimulationPage />} />
-          <Route path="/login" element={<LoginPage />} />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            {/* Public routes */}
+            <Route path="/" element={<SimulationPage />} />
+            <Route path="/login" element={<LoginPage />} />
 
-          {/* Protected routes — require authentication */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/fipe" element={<FipeTablePage />} />
-            <Route path="/loan-book-page" element={<LoanBookPage />} />
+            {/* Protected routes — require authentication */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/vehicle-table" element={<VehicleTablePage />} />
+              <Route path="/loan-book-page" element={<LoanBookPage />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
     </AuthProvider>
   );
 }

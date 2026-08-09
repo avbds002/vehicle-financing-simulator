@@ -1,9 +1,9 @@
 import { useState, useMemo } from "react";
-import { SearchBar } from "../components/FipeTablePageComponents/SearchBar";
-import { VehicleGrid } from "../components/FipeTablePageComponents/VehicleGrid";
+import { SearchBar } from "../components/VehicleTablePageComponents/SearchBar";
+import { VehicleGrid } from "../components/VehicleTablePageComponents/VehicleGrid";
 import { mockVehicles } from "../utils/mockVehicles";
 
-export const FipeTablePage = () => {
+export const VehicleTablePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
@@ -12,17 +12,17 @@ export const FipeTablePage = () => {
   // Derive unique filter options from the data
   const brandOptions = useMemo(
     () => [...new Set(mockVehicles.map((c) => c.name.split(" ")[0]))],
-    []
+    [],
   );
 
   const modelOptions = useMemo(
     () => [...new Set(mockVehicles.map((c) => c.name.split(" ")[1]))],
-    []
+    [],
   );
 
   const yearOptions = useMemo(
     () => [...new Set(mockVehicles.map((c) => c.year))],
-    []
+    [],
   );
 
   // Filter logic
@@ -43,7 +43,7 @@ export const FipeTablePage = () => {
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:p-12">
       <h2 className="text-blue-950 font-bold text-2xl sm:text-3xl mb-6">
-        Tabela FIPE - Consultar Preços de Carros
+        Tabela de veículos
       </h2>
 
       <SearchBar
