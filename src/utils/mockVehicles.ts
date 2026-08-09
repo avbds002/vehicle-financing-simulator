@@ -1,6 +1,6 @@
-import type { FipeCar } from "../types";
+import type { Vehicle } from "../types";
 
-export const mockVehicles: FipeCar[] = [
+export const mockVehicles: Vehicle[] = [
   // ── Cars ─────────────────────────────────────────────────────────────
   {
     id: 1,

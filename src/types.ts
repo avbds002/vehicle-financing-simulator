@@ -1,4 +1,6 @@
 export interface SimulationData {
+  vehicleName: string;
+  vehiclePhoto: string;
   vehicleValue: number;
   initialAmount: number;
   installments: number;
@@ -25,7 +27,7 @@ export interface RegisteredUser {
   password: string;
 }
 
-export interface FipeCar {
+export interface Vehicle {
   id: number;
   name: string;
   version: string;
