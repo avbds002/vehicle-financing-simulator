@@ -29,18 +29,21 @@ export const InitialAmountInput = ({
           max={max}
           step={1}
           value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
+          onChange={(e) => {
+            const rawValue = e.target.value.replace(/\D/g, "");
+            onChange(Number(rawValue));
+          }}
         />
         <input
-          type="number"
+          type="text"
           className="border rounded px-3 py-1.5 text-center w-full sm:w-24"
           id="initialAmount"
           name="initialAmount"
-          min={0}
-          max={max}
-          step={1}
           value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
+          onChange={(e) => {
+            const rawValue = e.target.value.replace(/\D/g, "");
+            onChange(Number(rawValue));
+          }}
         />
         <span id="percentageSpanValue" className="text-sm font-semibold">
           {percentage}%

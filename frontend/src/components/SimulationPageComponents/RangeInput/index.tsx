@@ -27,7 +27,8 @@ export const RangeInput = ({
   const value = isControlled ? controlledValue : internalValue;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(e.target.value);
+    const rawValue = e.target.value.replace(/\D/g, "");
+    const newValue = Number(rawValue);
     if (isControlled && onChange) {
       onChange(newValue);
     } else {
@@ -56,13 +57,10 @@ export const RangeInput = ({
           onChange={handleChange}
         />
         <input
-          type="number"
+          type="text"
           className="border rounded px-3 py-1.5 text-center w-full sm:w-32"
           id={id}
           name={id}
-          min={min}
-          max={max}
-          step={1}
           value={value}
           onChange={handleChange}
         />
