@@ -27,7 +27,7 @@ export interface RegisteredUser {
   password: string;
 }
 
-export interface FipeCar {
+export interface Vehicle {
   id: number;
   name: string;
   version: string;

@@ -1,8 +1,8 @@
-import type { FipeCar } from "../../../types";
+import type { Vehicle } from "../../../types";
 import { VehicleCard } from "../VehicleCard";
 
 interface VehicleGridProps {
-  cars: FipeCar[];
+  cars: Vehicle[];
 }
 
 export const VehicleGrid = ({ cars }: VehicleGridProps) => {

@@ -1,9 +1,9 @@
 import { BsFuelPump } from "react-icons/bs";
 import { MdOutlineVerifiedUser } from "react-icons/md";
-import type { FipeCar } from "../../../types";
+import type { Vehicle } from "../../../types";
 
 interface VehicleCardProps {
-  car: FipeCar;
+  car: Vehicle;
 }
 
 export const VehicleCard = ({ car }: VehicleCardProps) => {
