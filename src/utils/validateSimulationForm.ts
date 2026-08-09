@@ -16,7 +16,6 @@ export interface ValidationResult {
 
 const VEHICLE_MIN = 10000;
 const INITIAL_AMOUNT_MIN = 5000;
-const INTEREST_RATE_MIN = 1;
 
 /**
  * Validates all simulation form fields.
@@ -26,7 +25,7 @@ const INTEREST_RATE_MIN = 1;
 export function validateSimulationForm(
   values: SimulationFormValues,
 ): ValidationResult {
-  const { vehicleValue, initialAmount, installments, interestRate } = values;
+  const { vehicleValue, initialAmount, installments } = values;
 
   //Check if the vehicle type is a number
   if (isNaN(vehicleValue) || typeof vehicleValue !== "number") {
@@ -86,26 +85,6 @@ export function validateSimulationForm(
       isValid: false,
       resetInstallments: "null",
       parsedInstallments: 0,
-    };
-  }
-
-  //Check if the interestRate type is a number
-  if (isNaN(interestRate) || typeof interestRate !== "number") {
-    alert("Interest rate value cannot be NaN or string");
-    return {
-      isValid: false,
-      resetInterestRate: INTEREST_RATE_MIN,
-      parsedInstallments,
-    };
-  }
-
-  //Check if interestRate is a negative number
-  if (interestRate < 0) {
-    alert("interestRate cannot be a negative integer or string");
-    return {
-      isValid: false,
-      resetInterestRate: INTEREST_RATE_MIN,
-      parsedInstallments,
     };
   }
 

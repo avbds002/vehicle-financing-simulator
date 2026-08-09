@@ -1,4 +1,6 @@
 export interface SimulationData {
+  vehicleName: string;
+  vehiclePhoto: string;
   vehicleValue: number;
   initialAmount: number;
   installments: number;

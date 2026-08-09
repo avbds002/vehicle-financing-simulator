@@ -9,13 +9,14 @@ import { SelectInput } from "./SelectInput";
 import { InterestRateInput } from "./InterestRateInput";
 import { FormDisclaimer } from "./FormDisclaimer";
 import { SubmitButton } from "./SubmitButton";
+import { VehicleNameInput } from "./VehicleNameInput";
+import { VehiclePhotoInput } from "./VehiclePhotoInput";
 
 interface SimulationFormProps {
   addSimulation: (entry: SimulationData) => void;
 }
 
 const VEHICLE_MIN = 10000;
-const INTEREST_RATE_MIN = 1;
 
 const INSTALLMENT_OPTIONS = [
   { value: "60", label: "60 Meses" },
@@ -26,11 +27,13 @@ const INSTALLMENT_OPTIONS = [
 ];
 
 export const SimulationForm = ({ addSimulation }: SimulationFormProps) => {
+  const [vehicleName, setVehicleName] = useState("");
+  const [vehiclePhoto, setVehiclePhoto] = useState("");
   const [vehicleValue, setVehicleValue] = useState(85000);
   const [initialAmount, setInitialAmount] = useState(25000);
   const [installments, setInstallments] = useState<string>("null");
   const [stateRegion, setStateRegion] = useState<string>("null");
-  const [interestRate, setInterestRate] = useState(0);
+  const [interestRate, setInterestRate] = useState<string>("null");
 
   const handleVehicleChange = (newValue: number) => {
     setVehicleValue(newValue);
@@ -45,18 +48,32 @@ export const SimulationForm = ({ addSimulation }: SimulationFormProps) => {
     setInitialAmount(Math.min(newValue, vehicleValue));
   };
 
-  const handleInterestRateChange = (newValue: number) => {
-    setInterestRate(Math.max(newValue, INTEREST_RATE_MIN));
+  const handlePhotoSelect = (file: File) => {
+    // Revoke previous URL to avoid memory leaks
+    if (vehiclePhoto) {
+      URL.revokeObjectURL(vehiclePhoto);
+    }
+    const previewUrl = URL.createObjectURL(file);
+    setVehiclePhoto(previewUrl);
+  };
+
+  const handlePhotoRemove = () => {
+    if (vehiclePhoto) {
+      URL.revokeObjectURL(vehiclePhoto);
+    }
+    setVehiclePhoto("");
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const parsedInterestRate = Number(interestRate);
+
     const result = validateSimulationForm({
       vehicleValue,
       initialAmount,
       installments,
-      interestRate,
+      interestRate: parsedInterestRate,
     });
 
     if (result.resetVehicleValue !== undefined)
@@ -66,17 +83,19 @@ export const SimulationForm = ({ addSimulation }: SimulationFormProps) => {
     if (result.resetInstallments !== undefined)
       setInstallments(result.resetInstallments);
     if (result.resetInterestRate !== undefined)
-      setInterestRate(result.resetInterestRate);
+      setInterestRate(String(result.resetInterestRate));
 
     if (!result.isValid) return;
 
     //Build simulation entry and push to history
     const simulationEntry: SimulationData = {
+      vehicleName,
+      vehiclePhoto,
       vehicleValue,
       initialAmount,
       installments: result.parsedInstallments,
       stateRegion,
-      interestRate,
+      interestRate: parsedInterestRate,
     };
 
     addSimulation(simulationEntry);
@@ -89,6 +108,17 @@ export const SimulationForm = ({ addSimulation }: SimulationFormProps) => {
       </div>
       <div className="p-4 sm:p-6">
         <form action="#" onSubmit={handleSubmit}>
+          {/*Vehicle name input */}
+          <VehicleNameInput
+            value={vehicleName}
+            onChange={setVehicleName}
+          />
+          {/*Vehicle photo input */}
+          <VehiclePhotoInput
+            previewUrl={vehiclePhoto}
+            onFileSelect={handlePhotoSelect}
+            onRemove={handlePhotoRemove}
+          />
           {/*Input container - vehicle */}
           <RangeInput
             label="Valor do veículo (R$)"
@@ -124,8 +154,7 @@ export const SimulationForm = ({ addSimulation }: SimulationFormProps) => {
           {/*Interest rate */}
           <InterestRateInput
             value={interestRate}
-            min={INTEREST_RATE_MIN}
-            onChange={handleInterestRateChange}
+            onChange={setInterestRate}
           />
           {/*warning*/}
           <FormDisclaimer />
