@@ -99,6 +99,15 @@ export const SimulationForm = ({ addSimulation }: SimulationFormProps) => {
     };
 
     addSimulation(simulationEntry);
+
+    // Reset form to default values
+    setVehicleName("");
+    setVehiclePhoto("");
+    setVehicleValue(85000);
+    setInitialAmount(25000);
+    setInstallments("null");
+    setStateRegion("null");
+    setInterestRate("null");
   };
 
   return (
