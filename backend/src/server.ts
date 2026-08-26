@@ -1,19 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import 'dotenv/config';
+import app from './app';
 
-dotenv.config();
-
-const app = express();
-const port = process.env.PORT || 3001;
-
-app.use(cors());
-app.use(express.json());
-
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Vehicle Financing Simulator API is running' });
-});
+const port = process.env.PORT ?? 3333;
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`🚀 Server is running on http://localhost:${port}`);
+  console.log(`📋 Environment: ${process.env.NODE_ENV ?? 'development'}`);
+  console.log(`🏥 Health check: http://localhost:${port}/api/health`);
 });

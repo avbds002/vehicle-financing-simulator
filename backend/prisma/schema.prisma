@@ -1,0 +1,106 @@
+// =============================================================
+// Prisma Schema — Vehicle Financing Simulator
+// Banco de dados: PostgreSQL (Supabase ou instância local)
+// =============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------
+// Enum: UFs do Brasil (StateRegion)
+// ---------------------------------------------------------------
+enum StateRegion {
+  AC
+  AL
+  AP
+  AM
+  BA
+  CE
+  DF
+  ES
+  GO
+  MA
+  MT
+  MS
+  MG
+  PA
+  PB
+  PR
+  PE
+  PI
+  RJ
+  RN
+  RS
+  RO
+  RR
+  SC
+  SP
+  SE
+  TO
+}
+
+// ---------------------------------------------------------------
+// Model: User
+// ---------------------------------------------------------------
+model User {
+  id           String       @id @default(uuid())
+  fullName     String
+  email        String       @unique
+  dateOfBirth  DateTime
+  cpf          String       @unique
+  username     String       @unique
+  passwordHash String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  simulations  Simulation[]
+
+  @@map("users")
+}
+
+// ---------------------------------------------------------------
+// Model: Simulation
+// ---------------------------------------------------------------
+model Simulation {
+  id               String      @id @default(uuid())
+  userId           String?
+  vehicleValue     Float
+  initialAmount    Float
+  financedAmount   Float
+  installments     Int
+  interestRate     Float
+  stateRegion      StateRegion
+  monthlyPayment   Float
+  totalPayable     Float
+  totalInterest    Float
+  finalVehicleValue Float
+  createdAt        DateTime    @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("simulations")
+}
+
+// ---------------------------------------------------------------
+// Model: Vehicle (Tabela FIPE)
+// ---------------------------------------------------------------
+model Vehicle {
+  id          String  @id @default(uuid())
+  name        String
+  brand       String
+  model       String
+  version     String
+  year        Int
+  fipePrice   Float
+  consumption Float   // consumo médio (km/l)
+  insurance   Float   // estimativa anual de seguro (R$)
+  imageUrl    String?
+
+  @@map("vehicles")
+}
